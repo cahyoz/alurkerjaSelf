@@ -19,9 +19,15 @@ php artisan migrate:refresh
 php artisan key:generate
 ```
 
+```
+composer require laravel/ui
+```
+
 # Env 
 
-change the .env.example to .env
+```
+cp .env.example .env
+```
 
 ```
 # Env Database

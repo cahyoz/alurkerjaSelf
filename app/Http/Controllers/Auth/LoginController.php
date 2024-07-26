@@ -4,52 +4,45 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    function showLoginForm()
-    {
-        return view('auth.login');
-    }
+    use AuthenticatesUsers;
 
-    function registerForm()
-    {
-        return view('auth.register');
-    }
+    protected $redirectTo = '/home';
 
-    function login(Request $request)
+    public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Regenerate the session to prevent session fixation attacks
             $request->session()->regenerate();
-
-            // Save user credentials in the session
-            $request->session()->put('username', $request->input('username'));
+            $request->session()->put('email', $request->input('email'));
             $request->session()->put('role', Auth::user()->role);
 
-            // Redirect based on user role
-            if (Auth::user()->role === 2) {
-                return redirect()->intended('/home/');
-            }
-            if (Auth::user()->role === 1) {
-                return redirect()->intended('/home/');
-            }
-            if (Auth::user()->role === 3) {
-                Auth::logout();
-                return back()->withErrors([
-                    'username' => 'Your account has been blocked.',
-                ])->onlyInput('username');
+            switch (Auth::user()->role) {
+                case 'admin':
+                    return redirect()->intended('/admin/dashboard');
+                case 'client':
+                    return redirect()->intended('/client/dashboard');
+                case 'blocked':
+                    Auth::logout();
+                    return back()->withErrors([
+                        'email' => 'Your account has been blocked.',
+                    ])->withInput($request->only('email'));
+                default:
+                    return redirect()->intended('/home');
             }
         }
 
-        // If authentication fails, return back with an error message
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
-
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email'));
     }
-
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('welcome');
+    }
 }
-
