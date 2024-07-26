@@ -24,9 +24,9 @@ class LoginController extends Controller
 
             switch (Auth::user()->role) {
                 case 'admin':
-                    return redirect()->intended('/admin/dashboard');
+                    return redirect()->intended('/');
                 case 'client':
-                    return redirect()->intended('/client/dashboard');
+                    return redirect()->intended('/');
                 case 'blocked':
                     Auth::logout();
                     return back()->withErrors([
@@ -44,5 +44,15 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('welcome');
+    }
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
