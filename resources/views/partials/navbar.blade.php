@@ -35,6 +35,14 @@
                 href="#demo">Demo</a>
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
                 href="#contact">Kontak</a>
+                @if (auth()->check())
+                <!-- User is authenticated, you can add more links here if needed -->
+            @else
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="{{ route('login') }}">Sign In</a>
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="{{ route('register') }}">Sign Up</a>
+            @endif
         </nav>
     </div>
 </div>
