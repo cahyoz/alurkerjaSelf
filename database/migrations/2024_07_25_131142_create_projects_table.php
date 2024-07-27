@@ -13,7 +13,8 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->foreignId('users_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('modeler_id')->constrained('modeler')->onDelete('cascade');
         });
     }
 
