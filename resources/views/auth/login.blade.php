@@ -50,9 +50,25 @@
                     class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
                     {{ __('Login') }}
                 </button>
-                <div>
-                    <a href="auth/redirect" class="text-white">Sign in with Google</a>
+
+                <div class="mt-4">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-white">Or continue with</span>
+                        </div>
+                    </div>
+                    <a href="auth/redirect"
+                        class="block w-full text-center py-2 my-3 border flex items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                        <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5 mr-2" alt="Google Icon">
+                        <span class="dark:text-gray-300">Sign in with Google</span>
+                    </a>
                 </div>
+                {{-- <div>
+                    <a href="auth/redirect" class="text-white">Sign in with Google</a>
+                </div> --}}
             </form>
 
             <div class="mt-6 text-center">

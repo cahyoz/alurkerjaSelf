@@ -31,5 +31,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
-
 Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
