@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 26, 2024 at 07:45 AM
+-- Generation Time: Jul 27, 2024 at 03:30 PM
 -- Server version: 8.0.30
--- PHP Version: 8.3.9
+-- PHP Version: 8.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,6 +58,19 @@ CREATE TABLE `cities` (
 CREATE TABLE `companies` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_size_id` bigint UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_sizes`
+--
+
+CREATE TABLE `company_sizes` (
+  `id` bigint UNSIGNED NOT NULL,
   `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -83,25 +96,25 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2024_07_25_131136_create_provinces_table', 1),
 (2, '2024_07_25_131137_create_cities_table', 1),
 (3, '2024_07_25_131138_create_address_detail_table', 1),
-(4, '2024_07_25_131139_create_companies_table', 1),
-(5, '2024_07_25_131140_create_positions_table', 1),
-(6, '2024_07_25_131141_create_users_table', 1),
-(7, '2024_07_25_131142_create_projects_table', 1),
-(8, '2024_07_25_131143_create_models_table', 1),
-(9, '2024_07_25_134405_create_sessions_table', 1);
+(4, '2024_07_25_131138_create_company_sizes_table', 1),
+(5, '2024_07_25_131139_create_companies_table', 1),
+(6, '2024_07_25_131140_create_positions_table', 1),
+(7, '2024_07_25_131141_create_modeler_table', 1),
+(8, '2024_07_25_131141_create_users_table', 1),
+(9, '2024_07_25_131142_create_projects_table', 1),
+(10, '2024_07_25_134405_create_sessions_table', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `models`
+-- Table structure for table `modeler`
 --
 
-CREATE TABLE `models` (
+CREATE TABLE `modeler` (
   `id` bigint UNSIGNED NOT NULL,
-  `bpmn` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `project_id` bigint UNSIGNED NOT NULL
+  `bpmn` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -113,6 +126,7 @@ CREATE TABLE `models` (
 CREATE TABLE `positions` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -129,7 +143,8 @@ CREATE TABLE `projects` (
   `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `users_id` bigint UNSIGNED NOT NULL
+  `user_id` bigint UNSIGNED NOT NULL,
+  `modeler_id` bigint UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -160,14 +175,6 @@ CREATE TABLE `sessions` (
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('CJC9Tx1E8OdMUeyerNveM6bPoE4x5u4fDFvlFZom', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaGdDTG5OcmRSTDBseGZ2UTdkbTRDbUpIdGkyT3VJNkVYb1B4Q2s2aiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1721966960),
-('tGlGlvFyuzPSr7OtpSl6PXbi1UfmS67SI7SpoKko', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieGdCMjNVTHpqQTRQV2tVQXVwZENWZ0s0bEs0dzhBbG1kRVlPVEY4MyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1721979434);
-
 -- --------------------------------------------------------
 
 --
@@ -176,18 +183,20 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `google_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `google_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `google_token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `google_refresh_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `profile_picture` blob,
-  `whatsapp_number` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `whatsapp_number` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `company_id` bigint UNSIGNED DEFAULT NULL,
   `position_id` bigint UNSIGNED DEFAULT NULL,
   `address_detail_id` bigint UNSIGNED DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'client'
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'client',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -212,6 +221,13 @@ ALTER TABLE `cities`
 -- Indexes for table `companies`
 --
 ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `companies_company_size_id_foreign` (`company_size_id`);
+
+--
+-- Indexes for table `company_sizes`
+--
+ALTER TABLE `company_sizes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -221,24 +237,25 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `models`
+-- Indexes for table `modeler`
 --
-ALTER TABLE `models`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `models_project_id_foreign` (`project_id`);
+ALTER TABLE `modeler`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `positions`
 --
 ALTER TABLE `positions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `positions_company_id_foreign` (`company_id`);
 
 --
 -- Indexes for table `projects`
 --
 ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `projects_users_id_foreign` (`users_id`);
+  ADD KEY `projects_user_id_foreign` (`user_id`),
+  ADD KEY `projects_modeler_id_foreign` (`modeler_id`);
 
 --
 -- Indexes for table `provinces`
@@ -287,15 +304,21 @@ ALTER TABLE `companies`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `company_sizes`
+--
+ALTER TABLE `company_sizes`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `models`
+-- AUTO_INCREMENT for table `modeler`
 --
-ALTER TABLE `models`
+ALTER TABLE `modeler`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -339,16 +362,23 @@ ALTER TABLE `cities`
   ADD CONSTRAINT `cities_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`);
 
 --
--- Constraints for table `models`
+-- Constraints for table `companies`
 --
-ALTER TABLE `models`
-  ADD CONSTRAINT `models_project_id_foreign` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`);
+ALTER TABLE `companies`
+  ADD CONSTRAINT `companies_company_size_id_foreign` FOREIGN KEY (`company_size_id`) REFERENCES `company_sizes` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `positions`
+--
+ALTER TABLE `positions`
+  ADD CONSTRAINT `positions_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `projects`
 --
 ALTER TABLE `projects`
-  ADD CONSTRAINT `projects_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `projects_modeler_id_foreign` FOREIGN KEY (`modeler_id`) REFERENCES `modeler` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `projects_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`
