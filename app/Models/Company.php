@@ -11,10 +11,10 @@ class Company extends Model
 
     protected $fillable = ['name'];
 
-    public function sizes()
-    {
-        return $this->hasMany(CompanySize::class);
-    }
+    public function companySize()
+{
+    return $this->belongsTo(CompanySize::class);
+}
     public function positions()
     {
         return $this->hasMany(Position::class);

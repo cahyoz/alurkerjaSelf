@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use MustVerifyEmail, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +27,7 @@ class User extends Authenticatable
         'profile_picture',
         'company_id',
         'position_id',
-        'address_detail_id',
+        'address_details_id',
         'role',
     ];
 
@@ -62,5 +63,9 @@ class User extends Authenticatable
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+    public function addressDetail()
+    {
+        return $this->belongsTo(AddressDetail::class);
     }
 }

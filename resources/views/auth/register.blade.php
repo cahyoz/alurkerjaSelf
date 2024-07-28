@@ -46,7 +46,7 @@
                 </div>
 
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
-                    {{ __('Register') }}
+                    {{ __('next') }}
                 </button>
 
                 <div class="mt-4">

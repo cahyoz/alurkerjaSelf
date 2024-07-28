@@ -9,7 +9,12 @@ class AddressDetail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['city_id', 'address'];
+    protected $fillable = ['address', 'province_id', 'city_id'];
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 
     public function city()
     {

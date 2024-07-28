@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller as BaseController;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -13,9 +16,24 @@ class LoginController extends Controller
 
     protected $redirectTo = '/home';
 
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        // Cari pengguna berdasarkan email
+        $user = User::where('email', $credentials['email'])->first();
+
+        // Jika pengguna ditemukan dan memiliki Google ID, periksa kata sandi default
+        if ($user && $user->google_id && Hash::check('123', $user->password)) {
+            return redirect()->route('set.password')->withErrors([
+                'email' => 'Please set a new password to login.',
+            ]);
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -27,11 +45,6 @@ class LoginController extends Controller
                     return redirect()->intended('/');
                 case 'client':
                     return redirect()->intended('/');
-                case 'blocked':
-                    Auth::logout();
-                    return back()->withErrors([
-                        'email' => 'Your account has been blocked.',
-                    ])->withInput($request->only('email'));
                 default:
                     return redirect()->intended('/home');
             }
@@ -41,10 +54,12 @@ class LoginController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->withInput($request->only('email'));
     }
+
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('welcome');
     }
+
     public function logout(Request $request)
     {
         $this->guard()->logout();
