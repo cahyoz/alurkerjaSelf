@@ -16,6 +16,7 @@ php artisan migrate:refresh
 ```
 
 ```bash
+
 php artisan db:seed --class=ProvincesTableSeeder
 php artisan db:seed --class=CitiesTableSeeder
 php artisan db:seed --class=CompanySizeTableSeeder
@@ -39,7 +40,7 @@ cp .env.example .env
 ```
 # Env Database
 
---- Database PostgreSqL ---
+# Database PostgreSqL
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
@@ -47,7 +48,7 @@ DB_DATABASE=alurkerja
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
 
---- Database MySqL ---
+# Database MySqL
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
