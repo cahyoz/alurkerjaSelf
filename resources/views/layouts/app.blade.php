@@ -25,12 +25,14 @@
     <div class="min-h-screen">
         <div class="dark-mode:bg-gray-900 antialiased">
             <!-- NAVBAR -->
+
             @include('partials.navbar')
             <!-- END NAVBAR -->
 
             <!-- Main Content -->
             @yield('content')
             <!-- End Main Content -->
+            @yield('content2')
 
             <!-- FOOTER -->
             @include('partials.footer')

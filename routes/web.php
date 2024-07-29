@@ -38,8 +38,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('welcome');
     Route::get('/complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
+
+
+
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
