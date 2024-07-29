@@ -82,7 +82,10 @@ class RegisterController extends Controller
         $companies = Company::all();
         $positions = Position::all();
         $companysizes = CompanySize::all();
-        return view('auth.complete_registration', compact('provinces', 'cities', 'companies', 'positions', 'companysizes'));
+        return view(
+            'auth.complete_registration',
+            compact('provinces', 'cities', 'companies', 'positions', 'companysizes')
+        );
     }
 
     // Metode untuk menyimpan data pelengkap
@@ -108,6 +111,9 @@ class RegisterController extends Controller
         // Ensure company is linked with company size
         $company->company_size_id = $companySize->id;
         $company->save();
+        
+        $position->company_id = $company->id;
+        $position->save();
 
         // Create or update address detail
         $addressDetail = AddressDetail::updateOrCreate([
@@ -121,6 +127,8 @@ class RegisterController extends Controller
         $user->position_id = $position->id;
         $user->address_details_id = $addressDetail->id;
         $user->whatsapp_number = $validatedData['whatsapp_number'];
+
+        
 
         if ($request->hasFile('profile_picture')) {
             $user->profile_picture = $request->file('profile_picture')->store('profile_pictures', 'public');

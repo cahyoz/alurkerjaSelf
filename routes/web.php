@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
+    Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');

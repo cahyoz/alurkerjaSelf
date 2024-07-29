@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@extends('partials.navbar')
 @section('content')
     <!--HERO-->
     <div class="h-96 w-full bg-blue-500 bg-cover bg-center bg-no-repeat md:h-full"
@@ -188,5 +189,4 @@
             </div>
         </div>
     </div>
-    <!--END CLIENTS-->
 @endsection

@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    public function show()
+    {
+
+
+        $user = Auth::user();
+
+        // Kirim data pengguna ke tampilan
+        return view('profile.show', compact('user'));
+    }
     public function showCompleteProfileForm()
     {
         return view('auth.complete-profile');
