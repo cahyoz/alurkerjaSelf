@@ -2,54 +2,72 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller as BaseController;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    function showLoginForm()
+    use AuthenticatesUsers;
+
+    protected $redirectTo = '/home';
+
+    public function __construct()
     {
-        return view('auth.login');
+        $this->middleware('guest')->except('logout');
     }
 
-    function registerForm()
+    public function login(Request $request)
     {
-        return view('auth.register');
-    }
+        $credentials = $request->only('email', 'password');
 
-    function login(Request $request)
-    {
-        $credentials = $request->only('username', 'password');
+        // Cari pengguna berdasarkan email
+        $user = User::where('email', $credentials['email'])->first();
+
+        // Jika pengguna ditemukan dan memiliki Google ID, periksa kata sandi default
+        if ($user && $user->google_id && Hash::check('123', $user->password)) {
+            return redirect()->route('set.password')->withErrors([
+                'email' => 'Please set a new password to login.',
+            ]);
+        }
 
         if (Auth::attempt($credentials)) {
-            // Regenerate the session to prevent session fixation attacks
             $request->session()->regenerate();
-
-            // Save user credentials in the session
-            $request->session()->put('username', $request->input('username'));
+            $request->session()->put('email', $request->input('email'));
             $request->session()->put('role', Auth::user()->role);
 
-            // Redirect based on user role
-            if (Auth::user()->role === 2) {
-                return redirect()->intended('/home/');
-            }
-            if (Auth::user()->role === 1) {
-                return redirect()->intended('/home/');
-            }
-            if (Auth::user()->role === 3) {
-                Auth::logout();
-                return back()->withErrors([
-                    'username' => 'Your account has been blocked.',
-                ])->onlyInput('username');
+            switch (Auth::user()->role) {
+                case 'admin':
+                    return redirect()->intended('/');
+                case 'client':
+                    return redirect()->intended('/');
+                default:
+                    return redirect()->intended('/home');
             }
         }
 
-        // If authentication fails, return back with an error message
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ]);
-
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput($request->only('email'));
     }
 
-}
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('welcome');
+    }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+}

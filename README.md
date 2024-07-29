@@ -16,12 +16,25 @@ php artisan migrate:refresh
 ```
 
 ```
+php artisan db:seed --class=ProvincesTableSeeder
+php artisan db:seed --class=CitiesTableSeeder
+php artisan db:seed --class=CompanySizeTableSeeder
+
+```
+
+```
 php artisan key:generate
+```
+
+```
+composer require laravel/ui
 ```
 
 # Env 
 
-change the .env.example to .env
+```
+cp .env.example .env
+```
 
 ```
 # Env Database
