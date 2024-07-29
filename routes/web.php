@@ -13,7 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('welcome');
 
 Auth::routes(['verify' => true]);
 

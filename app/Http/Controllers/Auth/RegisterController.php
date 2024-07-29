@@ -100,7 +100,7 @@ class RegisterController extends Controller
         ]);
 
         $company = Company::firstOrCreate(['name' => $validatedData['company_name']]);
-        $position = Position::firstOrCreate(['size' => $validatedData['position_size']]);
+        $position = Position::firstOrCreate(['name' => $validatedData['position_name']]);
         $province = Province::firstOrCreate(['name' => $validatedData['province_name']]);
         $city = City::firstOrCreate(['name' => $validatedData['city_name']]);
         $companySize = CompanySize::firstOrCreate(['size' => $validatedData['company_size_size']]);
@@ -111,7 +111,7 @@ class RegisterController extends Controller
 
         // Create or update address detail
         $addressDetail = AddressDetail::updateOrCreate([
-            'address' => $validatedData['address_details'],
+            'address' => $validatedData['address_detail'],
             'province_id' => $province->id,
             'city_id' => $city->id,
         ]);
