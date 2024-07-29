@@ -121,6 +121,8 @@ class RegisterController extends Controller
             'province_id' => $province->id,
             'city_id' => $city->id,
         ]);
+        $position->company_id = $company->id;
+        $position->save();
 
         $user = Auth::user();
         $user->company_id = $company->id;

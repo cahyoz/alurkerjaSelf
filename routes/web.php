@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -12,13 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('welcome');
 
 Auth::routes(['verify' => true]);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
@@ -32,16 +32,22 @@ Route::post('complete-registration', [RegisterController::class, 'completeRegist
 Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])->name('set.password');
 Route::post('/set-password', [RegisterController::class, 'setPassword']);
 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('welcome');
     Route::get('/complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
-    Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
-});
-Route::middleware(['auth'])->group(function () {
+
+
+
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
 
 Route::get('/auth/redirect', [RegisterController::class, 'redirect']);
 Route::get('/auth/google/callback', [RegisterController::class, 'callback']);
