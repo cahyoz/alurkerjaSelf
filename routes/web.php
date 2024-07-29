@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -31,6 +32,8 @@ Route::post('complete-registration', [RegisterController::class, 'completeRegist
 
 Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])->name('set.password');
 Route::post('/set-password', [RegisterController::class, 'setPassword']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
