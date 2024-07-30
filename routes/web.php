@@ -29,9 +29,8 @@ Route::get('login/google/callback', [RegisterController::class, 'callback']);
 Route::get('complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
 Route::post('complete-registration', [RegisterController::class, 'completeRegistration']);
 
-// Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])->name('set.password');
-// Route::post('/set-password', [RegisterController::class, 'setPassword']);
-
+Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])->name('set.password');
+Route::post('/set-password', [RegisterController::class, 'setPassword']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -39,7 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard');
+    Route::get('/projects/{project}', [DashboardController::class, 'show'])->name('projects.show');
+    
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

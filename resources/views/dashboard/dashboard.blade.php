@@ -8,11 +8,39 @@
 </header>
 <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <a href=""
-            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
+        <button type="button"
+            class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+            data-bs-toggle="modal" data-bs-target="#addProjectModal">
             Add Project
-        </a>
-        <h2 class=" text-4xl font-extrabold text-blue-600 text-left mt-8 mb-4">Project List</h2>
+        </button>
+
+        <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addProjectModalLabel">Add New Project</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('dashboard') }}">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Project Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Project</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-4xl font-extrabold text-blue-600 text-left mt-8 mb-4">Project List</h2>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right">
                 <thead class="text-xs">
@@ -23,7 +51,8 @@
                 </thead>
                 <tbody>
                     @foreach ($projects as $project)
-                    <tr class="bg-white border-b">
+                    <tr class="bg-white border-b cursor-pointer transition-transform transform hover:scale-95 hover:shadow-lg hover:bg-gray-100"
+                        onclick="window.location='{{ route('projects.show', $project) }}'">
                         <td class="px-6 py-4">{{ $project->name }}</td>
                         <td class="px-6 py-4">{{ $project->updated_at->format('Y-m-d H:i:s') }}</td>
                     </tr>
@@ -32,7 +61,5 @@
             </table>
         </div>
     </div>
-
-
 </main>
 @endsection
