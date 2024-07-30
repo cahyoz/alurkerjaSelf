@@ -16,14 +16,16 @@ class CreateUsersTable extends Migration
             $table->string('google_id')->nullable();
             $table->string('google_token')->nullable();
             $table->string('google_refresh_token')->nullable();
-            $table->binary('profile_picture')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->string('whatsapp_number', 15)->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->foreignId('position_id')->nullable()->constrained('positions');
             $table->foreignId('address_details_id')->nullable()->constrained('address_details');
-            $table->string('role')->default('client'); // Menambahkan kolom role dengan default 'client'
+            $table->boolean('registered_via_google')->default(false);
+            $table->string('role')->default('client');
             $table->timestamps();
         });
+
         Schema::table('users', function (Blueprint $table) {
             if (Schema::hasColumn('users', 'province_id')) {
                 $table->dropColumn('province_id');

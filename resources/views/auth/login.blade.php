@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <div class="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+        <div class="w-full max-w-md bg-gray-900 dark:bg-gray-800 shadow-lg rounded-lg p-6">
             <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 text-center">{{ __('Login') }}</h2>
 
             <form method="POST" action="{{ route('login') }}">
@@ -57,7 +57,7 @@
                             <div class="w-full border-t border-gray-300"></div>
                         </div>
                         <div class="relative flex justify-center text-sm">
-                            <span class="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-white">Or continue with</span>
+                            <span class="bg-gray-700 dark:bg-gray-800 px-2 text-gray-500 dark:text-white">Or continue with</span>
                         </div>
                     </div>
                     <a href="auth/redirect"
