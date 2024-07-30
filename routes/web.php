@@ -28,6 +28,8 @@ Route::get('login/google/callback', [RegisterController::class, 'callback']);
 
 Route::get('complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
 Route::post('complete-registration', [RegisterController::class, 'completeRegistration']);
+Route::get('/get-cities/{province}', [RegisterController::class, 'getCitiesByProvince']);
+
 
 Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])->name('set.password');
 Route::post('/set-password', [RegisterController::class, 'setPassword']);

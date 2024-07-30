@@ -78,15 +78,21 @@ class RegisterController extends Controller
     public function showCompleteRegistrationForm()
     {
         $provinces = Province::all();
-        $cities = City::all();
         $companies = Company::all();
         $positions = Position::all();
         $companysizes = CompanySize::all();
         return view(
             'auth.complete_registration',
-            compact('provinces', 'cities', 'companies', 'positions', 'companysizes')
+            compact('provinces', 'companies', 'positions', 'companysizes')
         );
     }
+
+    public function getCitiesByProvince($provinceId)
+    {
+    $cities = City::where('province_id', $provinceId)->get();
+    return response()->json($cities);
+    }
+
 
     // Metode untuk menyimpan data pelengkap
     public function completeRegistration(Request $request)
