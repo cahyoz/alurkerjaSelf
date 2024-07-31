@@ -43,7 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/dashboard', [DashboardController::class, 'store'])->name('dashboard');
     Route::get('/projects/{project}', [DashboardController::class, 'show'])->name('projects.show');
     Route::delete('/projects/{project}', [DashboardController::class, 'destroy'])->name('projects.destroy');
-
+    
+    // Route::get('/bpmn', [DashboardController::class, bpmn])
     
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

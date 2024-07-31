@@ -34,10 +34,11 @@ public function store(Request $request)
 
 }
 
-public function show(Project $project)
-{
-    return view('project/projectDetail');
-}
+    public function show(Project $project)
+    {
+        
+        return view('project.projectDetail', compact('project'));
+    }
 
 public function destroy(Project $project)
 {
