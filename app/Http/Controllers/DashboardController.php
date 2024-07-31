@@ -39,4 +39,10 @@ public function show(Project $project)
     return view('project/projectDetail');
 }
 
+public function destroy(Project $project)
+{
+    $project->delete();
+    return redirect()->route('dashboard')->with('success', 'Project deleted successfully.');
+}
+
 }

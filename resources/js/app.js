@@ -14,9 +14,10 @@ import { createApp } from 'vue';
  */
 
 const app = createApp({});
-
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import BpmnViewer from './components/BpmnViewer.vue';
+// import vuewBpmn from './components/vueBpmn.vue';
+// import ExampleComponent from './components/ExampleComponent.vue';
+app.component('bpmn-viewer', BpmnViewer);
 
 /**
  * The following block of code may be used to automatically register your
