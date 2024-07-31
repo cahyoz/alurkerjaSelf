@@ -2,6 +2,8 @@ import BpmnJS from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import $ from 'jquery'; 
 var diagramUrl = 'https://cdn.statically.io/gh/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
 
+
+
 // modeler instance
 var bpmnModeler = new BpmnJS({
   container: '#canvas',

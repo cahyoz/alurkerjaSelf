@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BpmnController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/{project}', [DashboardController::class, 'show'])->name('projects.show');
     Route::delete('/projects/{project}', [DashboardController::class, 'destroy'])->name('projects.destroy');
     
-    // Route::get('/bpmn', [DashboardController::class, bpmn])
+    Route::get('/bpmn', [BpmnController::class, 'index'])->name('bpmn');
     
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
