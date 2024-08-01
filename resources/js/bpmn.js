@@ -2,8 +2,6 @@ import BpmnJS from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import $ from 'jquery'; 
 var diagramUrl = 'https://cdn.statically.io/gh/bpmn-io/bpmn-js-examples/dfceecba/starter/diagram.bpmn';
 
-
-
 // modeler instance
 var bpmnModeler = new BpmnJS({
   container: '#canvas',
@@ -20,6 +18,19 @@ async function exportDiagram() {
   try {
 
     var result = await bpmnModeler.saveXML({ format: true });
+
+    var blob = new Blob([result.xml], { type: 'application/xml' });
+    var url = URL.createObjectURL(blob);
+
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = 'diagram.bpmn';
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 
     alert('Diagram exported. Check the developer tools!');
 
@@ -71,5 +82,5 @@ async function openDiagram(bpmnXML) {
 // load external diagram file via AJAX and open it
 $.get(diagramUrl, openDiagram, 'text');
 
-// wire save button
-$('#save-button').click(exportDiagram);
+// wire downlaod button
+$('#download-button').click(exportDiagram);

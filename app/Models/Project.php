@@ -12,7 +12,8 @@ class Project extends Model
     protected $fillable = [
         'name',
         'description',
-        'user_id'
+        'user_id',
+        'modeler_id'
     ];
     public function user()
     {
@@ -20,6 +21,6 @@ class Project extends Model
     }
     public function modeler()
     {
-        return $this->belongsTo(Modeler::class, 'modeler_id');
+        return $this->belongsTo(Modeler::class);
     }
 }

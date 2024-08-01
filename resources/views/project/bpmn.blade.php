@@ -13,6 +13,7 @@
 
     <!-- needed for this example only -->
     <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <header class="bg-white shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -23,8 +24,11 @@
 <body>
     <div class="flex flex-col items-center justify-center min-h-screen ">
         <div id="canvas" class="w-[90%] h-[70vh] bg-white border border-gray-200"></div>
-        <button id="save-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Save
-            Diagram</button>
+        <button id="download-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Download Diagram</button>
+        <button id="save-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Save Diagram</button>
+        <input type="hidden" id="project-id" value="{{ $project->id }}">
     </div>
 
     @vite('resources/js/bpmn.js')

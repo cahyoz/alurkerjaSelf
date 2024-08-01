@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Modeler extends Model
 {
     use HasFactory;
+    protected $fillable = ['bpmn'];
     public function project()
     {
-        return $this->hasOne(Project::class, 'modeler_id');
+        return $this->hasOne(Project::class);
     }
 }
