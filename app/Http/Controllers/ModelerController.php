@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BpmnController extends Controller
+class ModelerController extends Controller
 {
     public function index()
     {
-        return view('project.bpmn');
+        return view('project.modeler');
     }
 }
