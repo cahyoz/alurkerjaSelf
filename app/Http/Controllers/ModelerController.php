@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ModelerController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('project.modeler');
+        $project = Project::findOrFail($id);
+
+        return view('project.modeler', compact('project'));
     }
 
     public function store(Request $request)

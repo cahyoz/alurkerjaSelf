@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     
-    Route::get('/bpmn', [ModelerController::class, 'index'])->name('bpmn');
+    Route::get('/modeler/{id}', [ModelerController::class, 'index'])->name('bpmn');
     
     Route::post('/modeler/save', [ModelerController::class, 'store'])->name('modeler.store');
     
