@@ -21,6 +21,6 @@ class Project extends Model
     }
     public function modeler()
     {
-        return $this->belongsTo(Modeler::class);
+        return $this->hasOne(Modeler::class);
     }
 }

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Modeler extends Model
 {
     use HasFactory;
-    protected $fillable = ['bpmn'];
+    protected $fillable = ['project','bpmn'];
     public function project()
     {
-        return $this->hasOne(Project::class);
+        return $this->belongsTo(Project::class);
     }
 }
