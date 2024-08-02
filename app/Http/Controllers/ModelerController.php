@@ -12,7 +12,10 @@ class ModelerController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        return view('project.modeler', compact('project'));
+        $modeler = Modeler::where('project_id', $project->id)->first();
+        $diagramXml = $modeler ? $modeler->bpmn : '';
+
+        return view('project.modeler', compact('project', 'diagramXml'));
     }
 
     public function store(Request $request)
@@ -22,11 +25,23 @@ class ModelerController extends Controller
             'project_id' => 'required|integer|exists:projects,id',
         ]);
 
-        $modeler = new Modeler();
-        $modeler->bpmn = $request->input('modeler');
-        $modeler->project_id = $request->input('project_id');
-        $modeler->save();
+        $modeler = Modeler::where('project_id', $request->input('project_id'))->first();
 
-        return response()->json(['message' => 'Diagram saved successfully!'], 200);
+        if($modeler){
+            $modeler->bpmn = $request->input('modeler');
+            $modeler->save();
+            $message = "Diagram updated successfully";
+        } else{
+            $modeler = new Modeler();
+            $modeler->bpmn = $request->input('modeler');
+            $modeler->project_id = $request->input('project_id');
+            $modeler->save();
+            $message = "Diagram updated successfully";
+        }
+
+        return response()->json([
+            'message' => $message,
+            'diagram' => $modeler->bpmn
+        ], 200);
     }
 }

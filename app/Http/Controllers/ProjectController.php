@@ -9,7 +9,9 @@ class ProjectController extends Controller
 {
     public function index()
 {
-    $projects = Project::all();
+    $userId = auth()->id();
+
+    $projects = Project::where('user_id', $userId)->get();
     return view('dashboard.dashboard', compact('projects'));
 }
 

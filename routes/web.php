@@ -36,7 +36,7 @@ Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])-
 Route::post('/set-password', [RegisterController::class, 'setPassword']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
 

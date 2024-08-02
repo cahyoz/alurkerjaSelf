@@ -30,7 +30,7 @@
             Save Diagram</button>
         <input type="hidden" id="project-id" value="{{ $project->id }}">
     </div>
-
+    <div id="diagram-data" data-xml="{!! htmlspecialchars($diagramXml, ENT_QUOTES, 'UTF-8') !!}"></div>
     @vite('resources/js/bpmn.js')
 </body>
 @endsection
