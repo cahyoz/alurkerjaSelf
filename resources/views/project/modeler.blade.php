@@ -24,11 +24,16 @@
 <body>
     <div class="flex flex-col items-center justify-center min-h-screen ">
         <div id="canvas" class="w-[90%] h-[70vh] bg-white border border-gray-200"></div>
-        <button id="download-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Download Diagram</button>
-        <button id="save-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Save Diagram</button>
-        <input type="hidden" id="project-id" value="{{ $project->id }}">
+        <div class="flex flex-row space-x-4">
+            <button id="download-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                Download Diagram</button>
+            <button id="save-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                Save Diagram</button>
+            <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" id="import-button">Import
+                Diagram</button>
+            <input type="file" id="file-input" accept=".bpmn, .xml" style="display: none;">
+            <input type="hidden" id="project-id" value="{{ $project->id }}">
+        </div>
     </div>
     <div id="diagram-data" data-xml="{!! htmlspecialchars($diagramXml, ENT_QUOTES, 'UTF-8') !!}"></div>
     @vite('resources/js/bpmn.js')

@@ -83,6 +83,20 @@ async function openDiagram(bpmnXML) {
     }
 }
 
+function importDiagram(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const xml = e.target.result;
+            openDiagram(xml);
+        };
+        reader.readAsText(file);
+    } else {
+        console.warn("No file selected for import.");
+    }
+}
+
 // Get diagram XML from Blade template
 const diagramXml =
     document.getElementById("diagram-data")?.getAttribute("data-xml") || "";
@@ -98,3 +112,5 @@ if (diagramXml) {
 // Wire up the download button
 $("#download-button").click(exportDiagram);
 $("#save-button").click(saveDiagram);
+$("#import-button").click(() => $("#file-input").click());
+$("#file-input").change(importDiagram);

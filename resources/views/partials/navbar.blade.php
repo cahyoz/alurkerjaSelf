@@ -2,7 +2,7 @@
     <div x-data="{ open: true, profileMenu: false }"
         class="mx-auto flex max-w-screen-xl flex-col px-4 md:flex-row md:items-center md:justify-between md:px-6 lg:px-8">
         <div class="flex flex-row items-center justify-between p-4">
-            <a href="#"
+            <a href="/"
                 class="dark-mode:text-white focus:shadow-outline rounded-lg text-lg font-semibold uppercase tracking-widest text-gray-900 focus:outline-none">
                 <img src="{{ asset('images/AlurKerja.png') }}" alt="Logo" />
             </a>
@@ -25,15 +25,15 @@
         <nav aria-label="" :class="{ 'flex': !open, 'hidden': open }"
             class="hidden flex-grow flex-col pb-4 md:flex md:flex-row md:justify-end md:pb-0">
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="#">Beranda</a>
+                href="/#">Beranda</a>
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="#about">Tentang</a>
+                href="/#about">Tentang</a>
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="#feature">Fitur</a>
+                href="/#feature">Fitur</a>
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="#demo">Demo</a>
+                href="/#demo">Demo</a>
             <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="#contact">Kontak</a>
+                href="/#contact">Kontak</a>
             @if (auth()->check())
 
             <!-- User is authenticated, show profile icon -->
