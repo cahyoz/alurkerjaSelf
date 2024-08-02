@@ -28,6 +28,7 @@
             Download Diagram</button>
         <button id="save-button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Save Diagram</button>
+        <input type="hidden" id="project-id" value="{{ $project->id }}">
     </div>
 
     @vite('resources/js/bpmn.js')

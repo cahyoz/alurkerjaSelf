@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Modeler;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -16,25 +17,16 @@ class ModelerController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
         $request->validate([
-            'bpmn' => 'required|string',
-            'project_id' => 'required|exists:projects,id',
+            'modeler' => 'required|string',
+            'project_id' => 'required|integer|exists:projects,id',
         ]);
 
-        // Save the BPMN data to the modeler table
-        $modeler = Modeler::create([
-            'bpmn' => $request->input('bpmn'),
-        ]);
+        $modeler = new Modeler();
+        $modeler->bpmn = $request->input('modeler');
+        $modeler->project_id = $request->input('project_id');
+        $modeler->save();
 
-        // Associate the modeler with the project
-        $project = Project::find($request->input('project_id'));
-        $project->modeler_id = $modeler->id;
-        $project->save();
-
-        return response()->json([
-            'message' => 'Diagram saved successfully!',
-            'modeler_id' => $modeler->id,
-        ]);
+        return response()->json(['message' => 'Diagram saved successfully!'], 200);
     }
 }

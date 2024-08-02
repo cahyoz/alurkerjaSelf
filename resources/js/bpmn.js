@@ -37,6 +37,34 @@ async function exportDiagram() {
   }
 }
 
+async function saveDiagram() {
+  try {
+    const result = await bpmnModeler.saveXML({ format: true });
+    const projectId = $('#project-id').val();
+    
+    // Send the XML to your Laravel backend
+    $.ajax({
+      type: 'POST',
+      url: '/modeler/store', // Update this URL to your save endpoint
+      data: { 
+        modeler: result.xml,
+        project_id: projectId,
+        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token if needed
+      },
+      success: function(response) {
+        alert('Diagram saved successfully!');
+      },
+      error: function(xhr, status, error) {
+        console.error('Could not save BPMN 2.0 diagram:', error);
+        alert('An error occurred while saving the diagram.');
+      }
+    });
+  } catch (err) {
+    console.error('Could not save BPMN 2.0 diagram:', err);
+  }
+}
+
+
 /**
  * Load and display a diagram in the modeler.
  *
@@ -70,3 +98,4 @@ $.get(diagramUrl, openDiagram, 'text');
 
 // Wire up the download button
 $('#download-button').click(exportDiagram);
+$('#save-button').click(saveDiagram);

@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/modeler/{id}', [ModelerController::class, 'index'])->name('bpmn');
     
-    Route::post('/modeler/save', [ModelerController::class, 'store'])->name('modeler.store');
+    Route::post('/modeler/store', [ModelerController::class, 'store'])->name('modeler.store');
     
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
