@@ -5,7 +5,6 @@ namespace App\Http;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,8 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth' => \App\Http\Middleware\AuthMiddleware::class,
             'role' => \App\Http\Middleware\AuthMiddleware::class,
             'guest' => \App\Http\Middleware\GuestMiddleware::class,
-            'check.profile' => \App\Http\Middleware\CheckProfileCompletion::class,
-            'checkProfileCompletion' => \App\Http\Middleware\CheckProfileCompletion::class,
+            'checkProject' => \App\Http\Middleware\MustBeProjectOwner::class,
+            'checkModeler' => \App\Http\Middleware\MustBeModelerOwner::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

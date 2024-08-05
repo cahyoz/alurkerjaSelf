@@ -36,21 +36,32 @@ Route::get('/set-password', [RegisterController::class, 'showSetPasswordForm'])-
 Route::post('/set-password', [RegisterController::class, 'setPassword']);
 
 Route::middleware(['auth'])->group(function () {
+    
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
     Route::get('/complete-registration', [RegisterController::class, 'showCompleteRegistrationForm'])->name('complete.registration');
     Route::post('/complete-registration', [RegisterController::class, 'completeRegistration']);
 
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
     Route::post('/dashboard', [ProjectController::class, 'store'])->name('dashboard');
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
-    
-    Route::get('/modeler/{id}', [ModelerController::class, 'index'])->name('bpmn');
-    
-    Route::post('/modeler/store', [ModelerController::class, 'store'])->name('modeler.store');
-    
+
+
+    Route::middleware(['checkProject'])->group(function () {
+        
+        Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+        Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    });
+
+    Route::middleware(['checkModeler'])->group(function () {
+        Route::get('/modeler/{project_id}', [ModelerController::class, 'index'])->name('modeler.show');
+        Route::post('/modeler/store', [ModelerController::class, 'store'])->name('modeler.store');    
+
+    });
+
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.update.picture');
+    Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
 
