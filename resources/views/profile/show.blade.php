@@ -11,7 +11,7 @@
             </li>
             <li class="me-2">
                 <a href="/detail"
-                    class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Details</a>
+                    class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-blue-600 dark:hover:text-gray-300">Details</a>
             </li>
             <li class="me-2">
                 <a href="/password"

@@ -11,12 +11,19 @@ use App\Models\Position;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\CompanySize;
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     public function showProfile()
     {
         $user = Auth::user();
         return view('profile.show', compact('user'));
+    }
+
+    public function showProfilePassword()
+    {
+        $user = Auth::user();
+        return view('profile.password', compact('user'));
     }
 
     public function showProfileDetail()
@@ -130,4 +137,18 @@ class ProfileController extends Controller
 
         return redirect()->route('profile')->with('success', 'Profile picture updated successfully!');
     }
+
+    public function updatePassword(Request $request)
+{
+    $request->validate([
+        'old_password' => ['required', 'current_password'],
+        'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+    ]);
+
+    $user = Auth::user();
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return redirect()->route('profile')->with('status', 'Password updated successfully!');
+}
 }

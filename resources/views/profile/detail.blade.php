@@ -140,7 +140,7 @@
                 <div class="flex items-center justify-between mt-6">
                     <button type="submit"
                         class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                        {{ __('Update') }}
+                        {{ __('Save') }}
                     </button>
                 </div>
             </form>
