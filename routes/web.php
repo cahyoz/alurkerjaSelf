@@ -6,11 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\AuthMiddleware;
-use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.update.picture');
     Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    
+    Route::post('/detail', [ProfileController::class, 'updateProfileDetail'])->name('detail.update');
 
     Route::get('/detail', [ProfileController::class, 'showProfileDetail'])->name('profile.detail');
 });

@@ -19,9 +19,9 @@
             </li>
         </ul>
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <form method="POST" action="{{ route('complete.registration') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('detail.update') }}">
+                <!-- @method('PUT') -->
                 @csrf
-
                 <div class="mb-4">
                     <label for="company_name" class="form-label">{{ __('Company') }}</label>
                     <input list="companies" id="company_name" name="company_name" class="form-control"
@@ -55,7 +55,9 @@
                     <select id="province_name" name="province_name" class="form-control" required>
                         <option value="" disabled selected>Select a province</option>
                         @foreach ($provinces as $province)
-                        <option value="{{ $province->id }}">{{ $province->name }}</option>
+                        <option value="{{ $province->id }}" {{ $province->id == $provinceId ? 'selected' : '' }}>
+                            {{ $province->name }}
+                        </option>
                         @endforeach
                     </select>
                     @error('province_name')
@@ -75,16 +77,14 @@
                 </div>
 
                 <script>
-                document.getElementById('province_name').addEventListener('change', function() {
-                    var provinceId = this.value;
+                function loadCities(provinceId) {
                     var citySelect = document.getElementById('city_name');
                     citySelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
 
                     fetch('/get-cities/' + provinceId)
                         .then(response => response.json())
                         .then(cities => {
-                            citySelect.innerHTML =
-                                '<option value="" disabled selected>Select a city</option>';
+                            citySelect.innerHTML = '<option value="" disabled selected>Select a city</option>';
                             cities.forEach(city => {
                                 var option = document.createElement('option');
                                 option.value = city.id;
@@ -97,13 +97,27 @@
                             citySelect.innerHTML =
                                 '<option value="" disabled selected>Error loading cities</option>';
                         });
+                }
+
+                document.getElementById('province_name').addEventListener('change', function() {
+                    var provinceId = this.value;
+                    loadCities(provinceId);
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var provinceSelect = document.getElementById('province_name');
+                    var initialProvinceId = provinceSelect.value;
+
+                    if (initialProvinceId) {
+                        loadCities(initialProvinceId);
+                    }
                 });
                 </script>
 
                 <div class="mb-4">
                     <label for="company_size_size" class="form-label">{{ __('Company Size') }}</label>
                     <input list="company_sizes" id="company_size_size" name="company_size_size" class="form-control"
-                        value="{{ old('company_size_size', $userCompanySize) }}" required>
+                        value="{{ old('company_size_size', $companySizeName) }}" required>
                     <datalist id="company_sizes">
                         @foreach ($companysizes as $companySize)
                         <option value="{{ $companySize->size }}"></option>
@@ -126,31 +140,10 @@
                 <div class="flex items-center justify-between mt-6">
                     <button type="submit"
                         class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                        {{ __('Complete Update') }}
+                        {{ __('Update') }}
                     </button>
                 </div>
             </form>
         </div>
 </section>
-
-<script>
-document.getElementById('profilePictureWrapper').addEventListener('click', function() {
-    document.getElementById('profilePictureInput').click();
-});
-
-document.getElementById('profilePictureInput').addEventListener('change', function() {
-    document.getElementById('profilePictureForm').submit();
-});
-
-const profilePictureWrapper = document.getElementById('profilePictureWrapper');
-const profilePictureOverlay = document.getElementById('profilePictureOverlay');
-
-profilePictureWrapper.addEventListener('mouseover', () => {
-    profilePictureOverlay.classList.remove('d-none');
-});
-
-profilePictureWrapper.addEventListener('mouseout', () => {
-    profilePictureOverlay.classList.add('d-none');
-});
-</script>
 @endsection
