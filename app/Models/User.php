@@ -66,6 +66,6 @@ class User extends Authenticatable
     }
     public function addressDetail()
     {
-        return $this->belongsTo(AddressDetail::class);
+        return $this->belongsTo(AddressDetail::class, 'address_details_id');
     }
 }

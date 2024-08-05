@@ -29,43 +29,20 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'whatsapp_number' => 'required|numeric',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
+            'whatsapp_number' => $validatedData['whatsapp_number']
         ]);
 
-        Auth::login($user);
-
-        return redirect()->route('complete.registration');
-    }
-
-    // Metode untuk login/register menggunakan Google
-    public function redirect()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function callback()
-    {
-        $socialUser = Socialite::driver('google')->user();
-
-        $user = User::updateOrCreate(
-            ['google_id' => $socialUser->id],
-            [
-                'name' => $socialUser->name,
-                'email' => $socialUser->email,
-                'profile_picture' => $socialUser->getAvatar(),
-                'password' => Hash::make('123'),
-                'google_token' => $socialUser->token,
-                'google_refresh_token' => $socialUser->refreshToken,
-            ]
-        );
-
-        if (!$user->password) {
-            $user->password = Hash::make('123'); // Set a default password if not set
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->profile_picture = $path;
             $user->save();
         }
 
@@ -134,33 +111,9 @@ class RegisterController extends Controller
         $user->company_id = $company->id;
         $user->position_id = $position->id;
         $user->address_details_id = $addressDetail->id;
-        $user->whatsapp_number = $validatedData['whatsapp_number'];
-
-        
-
-        if ($request->hasFile('profile_picture')) {
-            $user->profile_picture = $request->file('profile_picture')->store('profile_pictures', 'public');
-        }
 
         $user->save(); //abaikan jika syntax "save" error
 
-        return redirect()->route('set.password')->with('status', 'Registration completed!');
-    }
-    public function showSetPasswordForm()
-    {
-        return view('auth.set_password');
-    }
-
-    public function setPassword(Request $request)
-    {
-        $request->validate([
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = Auth::user();
-        $user->password = Hash::make($request->password);
-        $user->save(); //abaikan jika syntax "save" error
-
-        return redirect()->route('home')->with('status', 'Password set successfully!');
+        return redirect()->route('dashboard')->with('status', 'Registration completed!');
     }
 }

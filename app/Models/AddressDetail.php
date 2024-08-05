@@ -20,4 +20,8 @@ class AddressDetail extends Model
     {
         return $this->belongsTo(City::class);
     }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
