@@ -1,5 +1,5 @@
 # Setup
-![Home](https://drive.google.com/uc?export=view&id=1frk3f2G7hDvlakaPjv_gMzcwlmbbY76o)
+![Home](https://drive.google.com/uc?export=view&id=1_oYM1MqSAsSGBzL_RctJ7lRarxhCpLqC)
 pertama jalankan
 
 ```bash
