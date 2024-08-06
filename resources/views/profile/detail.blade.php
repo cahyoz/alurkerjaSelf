@@ -67,7 +67,8 @@
 
                 <div class="mb-4">
                     <label for="city_name" class="form-label">{{ __('City') }}</label>
-                    <select id="city_name" name="city_name" class="form-control" required>
+                    <select id="city_name" name="city_name" class="form-control" required
+                        data-default-city-id="{{ old('city_name', $defaultCityId) }}">
                         <option value="" disabled selected>Select a city</option>
                         <!-- Cities will be dynamically loaded here -->
                     </select>
@@ -75,44 +76,59 @@
                     <p class="mt-2 text-red-600 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
-                <input type="hidden" id="city_id" value="{{ old('city_name', $cityId) }}">
 
                 <script>
-                async function loadCities(provinceId) {
+                async function loadCities(provinceId, defaultCityId = null) {
                     var citySelect = document.getElementById('city_name');
                     citySelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
 
-                    await fetch('/get-cities/' + provinceId)
-                        .then(response => response.json())
-                        .then(cities => {
-                            citySelect.innerHTML = '<option value="" disabled selected>Select a city</option>';
-                            cities.forEach(city => {
-                                var option = document.createElement('option');
-                                option.value = city.id;
-                                option.textContent = city.name;
+                    try {
+                        const response = await fetch('/get-cities/' + provinceId);
 
-                                citySelect.appendChild(option);
-                            });
-                        })
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
 
-                        .catch(error => {
-                            console.error('Error fetching cities:', error);
-                            citySelect.innerHTML =
-                                '<option value="" disabled selected>Error loading cities</option>';
+                        const cities = await response.json();
+                        citySelect.innerHTML = '<option value="" disabled>Select a city</option>';
+
+                        cities.forEach(city => {
+                            var option = document.createElement('option');
+                            option.value = city.id;
+                            option.textContent = city.name;
+
+
+                            if (parseInt(city.id) === parseInt(defaultCityId)) {
+                                option.selected = true;
+                            }
+
+                            citySelect.appendChild(option);
                         });
+
+                    } catch (error) {
+                        console.error('Error fetching cities:', error);
+                        citySelect.innerHTML =
+                            '<option value="" disabled selected>Error loading cities</option>';
+                    }
                 }
 
-                document.getElementById('province_name').addEventListener('change', function() {
+
+                document.getElementById('province_name').addEventListener('change', async function() {
                     var provinceId = this.value;
-                    loadCities(provinceId);
+                    // Assuming you have the defaultCityId available, e.g., from server-side rendering or another variable
+                    var defaultCityId = document.getElementById('city_name').getAttribute(
+                        'data-default-city-id');
+                    await loadCities(provinceId, defaultCityId);
                 });
 
-                document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', async function() {
                     var provinceSelect = document.getElementById('province_name');
                     var initialProvinceId = provinceSelect.value;
+                    var defaultCityId = document.getElementById('city_name').getAttribute(
+                        'data-default-city-id');
 
                     if (initialProvinceId) {
-                        loadCities(initialProvinceId);
+                        await loadCities(initialProvinceId, defaultCityId);
                     }
                 });
                 </script>

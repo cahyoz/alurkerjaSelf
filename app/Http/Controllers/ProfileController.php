@@ -40,11 +40,10 @@ class ProfileController extends Controller
         $addressDetail = $user->addressDetail ? $user->addressDetail->address : '';
         $addressDetails = $user->addressDetail;
         $provinceId = $addressDetails && $addressDetails->province ? $addressDetails->province->name : '';
-        $cityId = $addressDetails && $addressDetails->city ? $addressDetails->city->name : '';
+        $defaultCityId = $addressDetails && $addressDetails->city ? $addressDetails->city->name : '';
         $company = $user->company;
         $companySizeName = $company && $company->companySize ? $company->companySize->size : '';
-
-        return view('profile.detail', compact('user', 'companies', 'positions', 'provinces', 'companysizes', 'companyName', 'addressDetail', 'positionName', 'provinceId', 'cityId', 'companySizeName'));
+        return view('profile.detail', compact('user', 'companies', 'positions', 'provinces', 'companysizes', 'companyName', 'addressDetail', 'positionName', 'provinceId', 'defaultCityId', 'companySizeName'));
     
     }
 
