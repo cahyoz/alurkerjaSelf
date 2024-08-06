@@ -1,8 +1,3 @@
-# User Roles
-
--   Client > Normal
--   Admin > Admin
-
 # Setup
 
 ```bash
