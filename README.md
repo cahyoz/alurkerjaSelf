@@ -56,10 +56,3 @@ DB_DATABASE=alurkerja
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-
-# Env Google
-```
-GOOGLE_CLIENT_ID=1088120285078-51dfnhboccc3ch66q0aj7meaogd3c3m3.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
-GOOGLE_CALLBACK=http://127.0.0.1:8000/auth/google/callback
-```
