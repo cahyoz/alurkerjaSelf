@@ -55,3 +55,4 @@ php artisan db:seed --class=CitiesTableSeeder
 php artisan db:seed --class=CompanySizeTableSeeder
 
 ```
+![Home](https://drive.google.com/uc?export=view&id=1frk3f2G7hDvlakaPjv_gMzcwlmbbY76o)
