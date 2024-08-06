@@ -1,39 +1,28 @@
 # Setup
 
-```bash
-composer update
-```
+pertama jalankan
 
 ```bash
-php artisan migrate:fresh
-or
-php artisan migrate:refresh
-```
-
-```bash
-
-php artisan db:seed --class=ProvincesTableSeeder
-php artisan db:seed --class=CitiesTableSeeder
-php artisan db:seed --class=CompanySizeTableSeeder
+composer install
 
 ```
 
-```bash
-composer require laravel/ui
-```
+lalu
 
 ```bash
 php artisan key:generate
 ```
 
-# Env 
+# Env
+
+buat copy dari .env.example
 
 ```bash
 cp .env.example .env
 ```
 
 ```
-# Env Database
+# Env Database (pilih salah satu)
 
 # Database PostgreSqL
 DB_CONNECTION=pgsql
@@ -50,4 +39,19 @@ DB_PORT=3306
 DB_DATABASE=alurkerja
 DB_USERNAME=root
 DB_PASSWORD=
+```
+
+# Database
+
+```bash
+php artisan migrate:fresh
+or
+php artisan migrate:refresh
+```
+
+```bash
+php artisan db:seed --class=ProvincesTableSeeder
+php artisan db:seed --class=CitiesTableSeeder
+php artisan db:seed --class=CompanySizeTableSeeder
+
 ```
