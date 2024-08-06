@@ -1,6 +1,8 @@
+![AlurKerja](https://github.com/user-attachments/assets/7ba8d456-1d98-4057-a728-767ed5232f7e)
 # Setup
 
 pertama jalankan
+
 
 ```bash
 composer install
