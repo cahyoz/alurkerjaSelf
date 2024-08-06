@@ -44,12 +44,13 @@
                                     @endif
                                 </form>
                                 <div id="profilePictureOverlay"
-                                    class="position-absolute top-0 w-96 h-96 rounded-full d-none">
+                                    class="position-absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 rounded-full d-none">
                                     <div
-                                        class="d-flex justify-content-center align-items-center h-96 w-96 bg-dark bg-opacity-50 rounded-full text-white">
+                                        class="d-flex justify-content-center align-items-center h-full w-full bg-dark bg-opacity-50 rounded-full text-white">
                                         Change Picture
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <h4 class="mb-2">{{ $user->username }}</h4>

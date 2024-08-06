@@ -37,12 +37,12 @@
 
         </form>
         <br>
-        <a href="{{ route('google.redirect') }}"
+        <!-- <a href="{{ route('google.redirect') }}"
             class="flex justify-center items-center px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
             <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
                 alt="Google Logo" class="w-6 h-6 mr-2">
             <span>Login with Google</span>
-        </a>
+        </a> -->
 
         <div class="mt-6 text-center">
             <p class="text-gray-700 dark:text-gray-300 text-sm">{{ __("Don't have an account?") }} <a

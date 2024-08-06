@@ -19,7 +19,7 @@ class GuestMiddleware
             }
 
             if ($userRole === 'client') {
-                return redirect('/client/dashboard')->with('error', 'You are already logged in.');
+                return redirect('/dashboard')->with('error', 'You are already logged in.');
             }
         }
 

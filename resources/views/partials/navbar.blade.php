@@ -23,63 +23,63 @@
         }
         </style>
         <nav aria-label="" :class="{ 'flex': !open, 'hidden': open }"
-            class="hidden flex-grow flex-col pb-4 md:flex md:flex-row md:justify-end md:pb-0">
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="/#">Beranda</a>
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="/#about">Tentang</a>
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="/#feature">Fitur</a>
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="/#demo">Demo</a>
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="/#contact">Kontak</a>
-            @if (auth()->check())
-
-            <!-- User is authenticated, show profile icon -->
-            <div @mouseenter="profileMenu = true" @mouseleave="profileMenu = false"
-                class="relative mt-2 md:mt-0 md:ml-4">
-                <button @click="profileMenu = !profileMenu" class="focus:outline-none">
-                    @if (Auth::user()->profile_picture)
-                    @if (filter_var(Auth::user()->profile_picture, FILTER_VALIDATE_URL))
-                    <img src="{{ Auth::user()->profile_picture }}" alt="Profile Picture"
-                        class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
-                    @else
-                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
-                        class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
-                    @endif
-                    @else
-                    <img src="{{ asset('path/to/default/profile/picture.png') }}" alt="Profile Picture"
-                        class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
-                    @endif
-
-                </button>
-                <div x-show="profileMenu" @click.away="profileMenu = false"
-                    class="absolute top-8 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1">
-                    <a href="{{ route('profile') }}"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                    <a href="{{ route('dashboard') }}"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                    <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-
-                </div>
+            class="hidden flex-grow flex-col pb-4 md:flex md:flex-row md:justify-end md:pb-0 ml-auto">
+            <div class="flex items-center space-x-4">
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="/#">Beranda</a>
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="/#about">Tentang</a>
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="/#feature">Fitur</a>
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="/#demo">Demo</a>
+                <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
+                    href="/#contact">Kontak</a>
             </div>
-            @else
-            <!-- User is not authenticated, show login and register links -->
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="{{ route('login') }}">Log In</a>
-            <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline mt-2 rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none md:mt-0 md:ml-4"
-                href="{{ route('register') }}">Sign Up</a>
-
-            @endif
-
-
+            <div class="flex items-center justify-center ml-auto mt-2 md:mt-0 md:ml-4 relative w-40 h-10">
+                @if (auth()->check())
+                <!-- User is authenticated, show profile icon -->
+                <div @mouseenter="profileMenu = true" @mouseleave="profileMenu = false">
+                    <button @click="profileMenu = !profileMenu">
+                        @if (Auth::user()->profile_picture)
+                        @if (filter_var(Auth::user()->profile_picture, FILTER_VALIDATE_URL))
+                        <img src="{{ Auth::user()->profile_picture }}" alt="Profile Picture"
+                            class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
+                        @else
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
+                            class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
+                        @endif
+                        @else
+                        <img src="{{ asset('path/to/default/profile/picture.png') }}" alt="Profile Picture"
+                            class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
+                        @endif
+                    </button>
+                    <div x-show="profileMenu" @click.away="profileMenu = false"
+                        class="absolute top-8 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1">
+                        <a href="{{ route('profile') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="{{ route('dashboard') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                        <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+                @else
+                <!-- User is not authenticated, show login and register links -->
+                <div class="flex items-center justify-center">
+                    <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none whitespace-nowrap"
+                        href="{{ route('login') }}">Login</a>
+                    <a class="dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 focus:shadow-outline rounded-lg bg-transparent px-4 py-2 text-sm font-semibold hover:bg-gray-200 hover:text-gray-900 hover:no-underline focus:bg-gray-200 focus:text-gray-900 focus:outline-none whitespace-nowrap"
+                        href="{{ route('register') }}">Sign Up</a>
+                </div>
+                @endif
+            </div>
         </nav>
+
     </div>
 </div>

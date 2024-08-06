@@ -39,10 +39,10 @@ class ProfileController extends Controller
         $positionName = $user->position ? $user->position->name : '';
         $addressDetail = $user->addressDetail ? $user->addressDetail->address : '';
         $addressDetails = $user->addressDetail;
-        $provinceId = $addressDetails->province ? $addressDetails->province->name : '';
-        $cityId = $addressDetails->city ? $addressDetails->city->name : '';
+        $provinceId = $addressDetails && $addressDetails->province ? $addressDetails->province->name : '';
+        $cityId = $addressDetails && $addressDetails->city ? $addressDetails->city->name : '';
         $company = $user->company;
-        $companySizeName = $company->companySize ? $company->companySize->size : '';
+        $companySizeName = $company && $company->companySize ? $company->companySize->size : '';
 
         return view('profile.detail', compact('user', 'companies', 'positions', 'provinces', 'companysizes', 'companyName', 'addressDetail', 'positionName', 'provinceId', 'cityId', 'companySizeName'));
     
@@ -62,7 +62,7 @@ class ProfileController extends Controller
         $user->whatsapp_number = $request->whatsapp_number;
         $user->save();
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated successfully!');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
     }
 
     public function updateProfileDetail(Request $request)

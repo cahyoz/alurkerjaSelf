@@ -75,13 +75,14 @@
                     <p class="mt-2 text-red-600 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
+                <input type="hidden" id="city_id" value="{{ old('city_name', $cityId) }}">
 
                 <script>
-                function loadCities(provinceId) {
+                async function loadCities(provinceId) {
                     var citySelect = document.getElementById('city_name');
                     citySelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
 
-                    fetch('/get-cities/' + provinceId)
+                    await fetch('/get-cities/' + provinceId)
                         .then(response => response.json())
                         .then(cities => {
                             citySelect.innerHTML = '<option value="" disabled selected>Select a city</option>';
@@ -89,9 +90,11 @@
                                 var option = document.createElement('option');
                                 option.value = city.id;
                                 option.textContent = city.name;
+
                                 citySelect.appendChild(option);
                             });
                         })
+
                         .catch(error => {
                             console.error('Error fetching cities:', error);
                             citySelect.innerHTML =
