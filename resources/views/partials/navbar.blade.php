@@ -41,11 +41,18 @@
                 class="relative mt-2 md:mt-0 md:ml-4">
                 <button @click="profileMenu = !profileMenu" class="focus:outline-none">
                     @if (Auth::user()->profile_picture)
-                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
+                    @if (filter_var(Auth::user()->profile_picture, FILTER_VALIDATE_URL))
+                    <img src="{{ Auth::user()->profile_picture }}" alt="Profile Picture"
                         class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
                     @else
-                    <img src="{{ Auth::user()->profile_picture }}" alt="Profile Picture" class="profile-picture">
+                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
+                        class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
                     @endif
+                    @else
+                    <img src="{{ asset('path/to/default/profile/picture.png') }}" alt="Profile Picture"
+                        class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
+                    @endif
+
                 </button>
                 <div x-show="profileMenu" @click.away="profileMenu = false"
                     class="absolute top-8 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1">
