@@ -57,3 +57,6 @@ php artisan db:seed --class=CitiesTableSeeder
 php artisan db:seed --class=CompanySizeTableSeeder
 
 ```
+![Slide 16_9 - 1 (1)](https://github.com/user-attachments/assets/c1287af4-449d-4be0-a1bf-87a1d531cec0)
+
+
