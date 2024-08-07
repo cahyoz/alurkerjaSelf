@@ -26,9 +26,6 @@ Route::get('complete-registration', [RegisterController::class, 'showCompleteReg
 Route::post('complete-registration', [RegisterController::class, 'completeRegistration'])->name('complete.registration');
 Route::get('/get-cities/{province}', [RegisterController::class, 'getCitiesByProvince']);
 
-Route::get('/google/redirect', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
-
 Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
