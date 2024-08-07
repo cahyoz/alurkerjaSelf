@@ -83,6 +83,132 @@ class CitiesTableSeeder extends Seeder
             ['name' => 'Pasuruan', 'province_id' => 11],
             ['name' => 'Probolinggo', 'province_id' => 11],
             ['name' => 'Surabaya', 'province_id' => 11],
+            
+            ['name' => 'Jambi', 'province_id' => 8],
+    ['name' => 'Sungai Penuh', 'province_id' => 8],
+
+    // Jawa Barat
+    ['name' => 'Bandung', 'province_id' => 9],
+    ['name' => 'Bogor', 'province_id' => 9],
+    ['name' => 'Bekasi', 'province_id' => 9],
+    ['name' => 'Depok', 'province_id' => 9],
+    ['name' => 'Cirebon', 'province_id' => 9],
+
+    // Jawa Tengah
+    ['name' => 'Semarang', 'province_id' => 10],
+    ['name' => 'Surakarta', 'province_id' => 10],
+    ['name' => 'Tegal', 'province_id' => 10],
+    ['name' => 'Pekalongan', 'province_id' => 10],
+    ['name' => 'Magelang', 'province_id' => 10],
+
+    // Jawa Timur
+    ['name' => 'Surabaya', 'province_id' => 11],
+    ['name' => 'Malang', 'province_id' => 11],
+    ['name' => 'Mojokerto', 'province_id' => 11],
+    ['name' => 'Pasuruan', 'province_id' => 11],
+    ['name' => 'Probolinggo', 'province_id' => 11],
+
+    // Kalimantan Barat
+    ['name' => 'Pontianak', 'province_id' => 12],
+    ['name' => 'Singkawang', 'province_id' => 12],
+
+    // Kalimantan Selatan
+    ['name' => 'Banjarmasin', 'province_id' => 13],
+    ['name' => 'Banjarbaru', 'province_id' => 13],
+
+    // Kalimantan Tengah
+    ['name' => 'Palangka Raya', 'province_id' => 14],
+
+    // Kalimantan Timur
+    ['name' => 'Samarinda', 'province_id' => 15],
+    ['name' => 'Balikpapan', 'province_id' => 15],
+
+    // Kalimantan Utara
+    ['name' => 'Tarakan', 'province_id' => 16],
+
+    // Kepulauan Riau
+    ['name' => 'Tanjung Pinang', 'province_id' => 17],
+    ['name' => 'Batam', 'province_id' => 17],
+
+    // Lampung
+    ['name' => 'Bandar Lampung', 'province_id' => 18],
+    ['name' => 'Metro', 'province_id' => 18],
+
+    // Maluku
+    ['name' => 'Ambon', 'province_id' => 19],
+    ['name' => 'Tual', 'province_id' => 19],
+
+    // Maluku Utara
+    ['name' => 'Ternate', 'province_id' => 20],
+    ['name' => 'Tidore Kepulauan', 'province_id' => 20],
+
+    // Nusa Tenggara Barat
+    ['name' => 'Mataram', 'province_id' => 21],
+    ['name' => 'Bima', 'province_id' => 21],
+
+    // Nusa Tenggara Timur
+    ['name' => 'Kupang', 'province_id' => 22],
+
+    // Papua
+    ['name' => 'Jayapura', 'province_id' => 23],
+    ['name' => 'Timika', 'province_id' => 23],
+
+    // Papua Barat
+    ['name' => 'Manokwari', 'province_id' => 24],
+    ['name' => 'Sorong', 'province_id' => 24],
+
+    // Papua Barat Daya
+    ['name' => 'Fakfak', 'province_id' => 25],
+
+    // Papua Pegunungan
+    ['name' => 'Wamena', 'province_id' => 26],
+
+    // Papua Selatan
+    ['name' => 'Merauke', 'province_id' => 27],
+
+    // Papua Tengah
+    ['name' => 'Nabire', 'province_id' => 28],
+
+    // Riau
+    ['name' => 'Pekanbaru', 'province_id' => 29],
+    ['name' => 'Dumai', 'province_id' => 29],
+
+    // Sulawesi Barat
+    ['name' => 'Mamuju', 'province_id' => 30],
+
+    // Sulawesi Selatan
+    ['name' => 'Makassar', 'province_id' => 31],
+    ['name' => 'Parepare', 'province_id' => 31],
+
+    // Sulawesi Tengah
+    ['name' => 'Palu', 'province_id' => 32],
+
+    // Sulawesi Tenggara
+    ['name' => 'Kendari', 'province_id' => 33],
+    ['name' => 'Bau-Bau', 'province_id' => 33],
+
+    // Sulawesi Utara
+    ['name' => 'Manado', 'province_id' => 34],
+    ['name' => 'Bitung', 'province_id' => 34],
+
+    // Sumatra Barat
+    ['name' => 'Padang', 'province_id' => 35],
+    ['name' => 'Bukittinggi', 'province_id' => 35],
+
+    // Sumatra Selatan
+    ['name' => 'Palembang', 'province_id' => 36],
+    ['name' => 'Prabumulih', 'province_id' => 36],
+
+    // Sumatra Utara
+    ['name' => 'Medan', 'province_id' => 37],
+    ['name' => 'Binjai', 'province_id' => 37],
+
+    // Yogyakarta
+    ['name' => 'Yogyakarta', 'province_id' => 38],
+    ['name' => 'Bantul', 'province_id' => 38],
+    ['name' => 'Sleman', 'province_id' => 38],
+    ['name' => 'Gunung Kidul', 'province_id' => 38],
+    ['name' => 'Kulon Progo', 'province_id' => 38]
             // Tambahkan data kota lainnya sesuai dengan provinsi yang ada
         ]);
     }
