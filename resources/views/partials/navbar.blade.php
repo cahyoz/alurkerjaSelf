@@ -50,7 +50,7 @@
                             class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
                         @endif
                         @else
-                        <img src="{{ asset('path/to/default/profile/picture.png') }}" alt="Profile Picture"
+                        <img src="{{ asset('images/picture.png') }}" alt="Profile Picture"
                             class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
                         @endif
                     </button>
