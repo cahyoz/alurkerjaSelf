@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Routing\Controller;
-use App\Http\Controllers\Controller as BaseController;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
